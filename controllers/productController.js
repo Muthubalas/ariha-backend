@@ -5,7 +5,10 @@ const Product = require('../models/Product');
 
 // Create a new product
 exports.createProduct = async (req, res) => {
+
+
   try {
+    
     const {
       name,
       category,
@@ -16,6 +19,7 @@ exports.createProduct = async (req, res) => {
       short_description,
       long_description,
     } = req.body;
+    const tagsArray = Array.isArray(tag) ? tag : tag.split(',').map(t => t.trim());
 
     const product_image = req.file ? `/products/upload/${req.file.filename}` : null;
 
@@ -23,7 +27,7 @@ exports.createProduct = async (req, res) => {
       name,
       category,
       price,
-      tag,
+      tag:tagsArray,
       stock,
       title,
       short_description,
@@ -88,7 +92,9 @@ exports.updateProduct = async (req, res) => {
     product.price = price || product.price;
     product.stock = stock || product.stock;
     product.title = title || product.title;
-    product.tag = tag || product.tag;
+if (tag) {
+  product.tag = Array.isArray(tag) ? tag : tag.split(',').map(t => t.trim());
+}
     product.short_description = short_description || product.short_description;
     product.long_description = long_description || product.long_description;
 
