@@ -9,6 +9,7 @@ exports.createProduct = async (req, res) => {
     const {
       name,
       category,
+      tag,
       price,
       stock,
       title,
@@ -22,6 +23,7 @@ exports.createProduct = async (req, res) => {
       name,
       category,
       price,
+      tag,
       stock,
       title,
       short_description,
@@ -70,6 +72,7 @@ exports.updateProduct = async (req, res) => {
       name,
       category,
       price,
+      tag,
       stock,
       title,
       short_description,
@@ -85,6 +88,7 @@ exports.updateProduct = async (req, res) => {
     product.price = price || product.price;
     product.stock = stock || product.stock;
     product.title = title || product.title;
+    product.tag = tag || product.tag;
     product.short_description = short_description || product.short_description;
     product.long_description = long_description || product.long_description;
 
